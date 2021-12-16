@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-	  登录
+	  {{user}}
+	  <hr/>登录
 	  <form @submit.prevent="onSubmit">
-   <label>
-		<span>用户名</span>
-		<input type="text" v-model="user.username">
-	</label>
-	<label>
-		<span>密码</span>
-		<input type="password" v-model="user.password">
-	</label>
-	<button type="submit">登录</button>
+		  <label>
+			  <span>用户名</span>
+		<!-- <MyInput v-model="user.username"/>两种使用方法，要么使用v-model,要么使用:value -->
+		     <MyInput :value="user.username" 
+			  @input="user.username =$event"/>
+	     </label>
+		  <label>
+			  <span>密码</span>
+			  <input type="password" v-model="user.password">
+	     </label>
+	     <button type="submit">登录</button>
      </form>
   </div>
 </template>
 
 <script>
+import MyInput from "./MyInput.vue";
 export default {
-  name: 'App',
-  data () {
-    return {
-		 user:{
-			 username:"",
-			 password:""
+	components:{MyInput},
+   name: 'App',
+   data () {
+		return {
+			user:{
+				username:"",
+			   password:""
 		 },
 		 x:[]
     };
@@ -32,7 +37,6 @@ export default {
 		  console.log(this.user);
 	  }
   },
-  components: {}
 };
 </script>
 
